@@ -5,11 +5,18 @@
 
 ---
 
-## 📋 Présentation
+##  Présentation
 
 Application web de quiz interactif avec compte à rebours, feedback visuel immédiat et classement des parties. L'utilisateur saisit son pseudo, répond à 10 questions en 30 secondes chacune, et son score est enregistré dans un classement général.
 
 ---
+##  Équipe
+
+| Membre | Rôle |
+|---|---|
+| Bolou Manassé Yvan| HTML + Structure |
+| Tchicaya André | CSS + Design |
+| Gnabris Boris et Bolou Manassé | JavaScript + Logique |
 
 ##  Démo
 
@@ -118,13 +125,7 @@ Lance un `setInterval` d'1 seconde. Si `tempsRestant` atteint 0 sans réponse, a
 
 ---
 
-## 👥 Équipe
 
-| Membre | Rôle |
-|---|---|
-| [Bolou Manassé Yvan] | HTML + Structure |
-| [Tchicaya André] | CSS + Design |
-| [Gnabris Boris et Bolou Manassé] | JavaScript + Logique |
 
 ---
 
