@@ -585,6 +585,5 @@ DOM.btnRejouer.addEventListener("click", () => {
 /* ─────────────────────────────────────────
    18. INITIALISATION
 ───────────────────────────────────────── */
-// Afficher l'écran d'accueil au démarrage
 afficherEcran(DOM.screenAccueil);
 afficherClassement(); // tableau vide au départ
