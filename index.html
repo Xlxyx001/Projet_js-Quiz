@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz Interactif</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════
+       ÉCRAN D'ACCUEIL
+  ══════════════════════════════════════ -->
+  <div id="screen-accueil" class="screen active">
+    <div class="accueil-bg"></div>
+    <div class="accueil-card">
+      <div class="accueil-logo">
+        <span class="logo-q">Q</span>
+        <span class="logo-text">UIZ</span>
+      </div>
+      <h1 class="accueil-titre">Prêt à tester<br>vos connaissances en DEV ?</h1>
+      <p class="accueil-sous">10 questions · 30 secondes chacune · Classement en direct</p>
+      <div class="pseudo-group">
+        <label for="input-pseudo">Votre pseudo</label>
+        <input type="text" id="input-pseudo" placeholder="Ex: Tchicaya_André" maxlength="20" autocomplete="off" />
+        <span id="pseudo-error" class="pseudo-error"></span>
+      </div>
+      <button id="btn-commencer" class="btn-primary">
+        <span>Commencer le Quiz</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+  <!-- ══════════════════════════════════════
+       ÉCRAN DE JEU
+  ══════════════════════════════════════ -->
+  <div id="screen-jeu" class="screen">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <span class="logo-q small">Q</span>
+        <span class="logo-text small">UIZ</span>
+      </div>
+      <div class="sidebar-info">
+        <div class="info-bloc">
+          <span class="info-label">JOUEUR</span>
+          <span id="sidebar-pseudo" class="info-val">—</span>
+        </div>
+        <div class="info-bloc">
+          <span class="info-label">SCORE</span>
+          <span id="sidebar-score" class="info-val score-val">0</span>
+        </div>
+        <div class="info-bloc">
+          <span class="info-label">QUESTION</span>
+          <span id="sidebar-progression" class="info-val">1 / 10</span>
+        </div>
+      </div>
+      <!-- Barre de progression -->
+      <div class="progress-wrap">
+        <div class="progress-bar">
+          <div id="progress-fill" class="progress-fill" style="width:0%"></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Zone principale -->
+    <main class="jeu-main">
+      <!-- Header -->
+      <header class="jeu-header">
+        <h2 class="jeu-titre">Quiz Interactif</h2>
+        <!-- Chronomètre -->
+        <div class="timer-wrap">
+          <svg class="timer-ring" viewBox="0 0 80 80">
+            <circle class="timer-track" cx="40" cy="40" r="34"/>
+            <circle id="timer-arc" class="timer-arc" cx="40" cy="40" r="34"/>
+          </svg>
+          <span id="timer-display" class="timer-display">30</span>
+        </div>
+      </header>
+
+      <!-- Carte Question -->
+      <section class="question-card">
+        <div class="question-numero">
+          <span id="q-num">Question 1</span>
+          <span id="q-total"> / 10</span>
+        </div>
+        <h1 id="question-texte" class="question-texte">Chargement…</h1>
+
+        <!-- Grille des réponses -->
+        <div id="reponses-grid" class="reponses-grid">
+          <!-- Boutons générés dynamiquement -->
+        </div>
+
+        <!-- Feedback -->
+        <div id="feedback-bar" class="feedback-bar hidden">
+          <span id="feedback-icone">✓</span>
+          <span id="feedback-texte">Bonne réponse !</span>
+        </div>
+      </section>
+
+      <!-- Classement général (visible pendant le jeu) -->
+      <section class="classement-section">
+        <div class="classement-header">
+          <h3 class="classement-titre">🏆 Classement général</h3>
+        </div>
+        <div class="classement-table-wrap">
+          <table class="classement-table">
+            <thead>
+              <tr>
+                <th>Rang</th>
+                <th>Pseudo</th>
+                <th>Score</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="classement-body">
+              <tr class="classement-vide">
+                <td colspan="4">Aucune partie enregistrée</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       ÉCRAN DE RÉSULTATS
+  ══════════════════════════════════════ -->
+  <div id="screen-resultats" class="screen">
+    <div class="resultats-bg"></div>
+    <div class="resultats-card">
+      <div class="resultats-emoji" id="res-emoji">🎉</div>
+      <h2 class="resultats-mention" id="res-mention">Excellent !</h2>
+      <div class="resultats-score-wrap">
+        <div class="resultats-score-circle">
+          <span id="res-score" class="res-score-num">0</span>
+          <span class="res-score-sep">/</span>
+          <span class="res-score-total">100</span>
+        </div>
+      </div>
+      <p class="resultats-message" id="res-message">Félicitations, vous avez tout déchiré !</p>
+      <div class="resultats-stats">
+        <div class="stat-item">
+          <span id="res-bonnes" class="stat-num">0</span>
+          <span class="stat-label">Bonnes réponses</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat-item">
+          <span id="res-mauvaises" class="stat-num">0</span>
+          <span class="stat-label">Mauvaises réponses</span>
+        </div>
+      </div>
+      <button id="btn-rejouer" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10M23 14l-4.64 4.36A9 9 0 013.51 15"/></svg>
+        <span>Rejouer</span>
+      </button>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
